@@ -1,0 +1,13 @@
+# weights and data never live in this repo (Hugging Face carries the weights; the corpus is not released)
+*.safetensors
+*.bin
+*.gguf
+*.pt
+*.jsonl
+*.xlsx
+*.csv
+data/
+artifacts/
+__pycache__/
+*.pyc
+.venv/
