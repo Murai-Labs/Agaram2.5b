@@ -17,9 +17,10 @@ tags:
 GGUF files of Agaram 2.5B for llama.cpp and tools built on it. Agaram is a Tamil–English model **trained from scratch**
 by Murai Labs and Ramchand Kumaresan; it is not a fine-tune of any other model. Model cards:
 [chat](https://huggingface.co/murai-labs/agaram-2.5b-instruct), [base](https://huggingface.co/murai-labs/agaram-2.5b).
-Code: [Murai-Labs/Agaram2.5b](https://github.com/Murai-Labs/Agaram2.5b).
+Code: [Murai-Labs/Agaram2.5b](https://github.com/Murai-Labs/Agaram2.5b). Paper: [arXiv:2610.18420](https://arxiv.org/abs/2610.18420).
+Try the chat model online: [chat demo](https://huggingface.co/spaces/mechramc/agaram-2.5b-chat).
 
-The chat (instruct) GGUFs were rebuilt on 2026-10-26 from Agaram 2.5B-Instruct s700 (SFT v2, step 700) with llama.cpp
+The chat (instruct) GGUFs were rebuilt on 2026-10-26 from the released Agaram 2.5B-Instruct weights with llama.cpp
 `b11574`; the source model.safetensors SHA-256 is
 `0123c671b233b3e0a6b411e3e88ecb569485f4e20b71719329ac88b75e05bdc6`. The base GGUFs are the 2026-10-12 build, also
 llama.cpp `b11574`. File hashes are in `SHA256SUMS`.

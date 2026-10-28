@@ -7,6 +7,7 @@ any other model. It is a non-profit research model. It is meant for chatting in 
 
 | | |
 |---|---|
+| Try it online | [chat demo on Hugging Face Spaces](https://huggingface.co/spaces/mechramc/agaram-2.5b-chat) |
 | Chat model | [murai-labs/agaram-2.5b-instruct](https://huggingface.co/murai-labs/agaram-2.5b-instruct) |
 | Base model | [murai-labs/agaram-2.5b](https://huggingface.co/murai-labs/agaram-2.5b) |
 | Chat CLI | `serving/agaram_chat.py` (greedy, 512 new tokens, crisis-resource footer) |

@@ -1,13 +1,13 @@
-"""Token-id parity of an Agaram 2.5B GGUF against the HF tokenizer (2026-10-12). Runs ON spark-1003.
+"""Token-id parity of an Agaram 2.5B GGUF against the HF tokenizer.
 
-Texts: every turn and reference of openchat v1/v2/v3, plus 300 held-out SFT conversations rendered with the chat
+Texts: every turn and reference of our chat evaluation sets, plus 300 held-out SFT conversations rendered with the chat
 template (Tamil script, Tanglish, English, code, tool-call JSON). Raw texts are compared without special-token
 parsing; rendered conversations are compared with special tokens parsed (as llama.cpp's --jinja path would see them).
 Reports exact-match counts, the first differing texts, and how many texts contain ZWJ/ZWNJ (the only regex difference
 between our pre-tokenizer and llama.cpp's qwen35 pattern).
 
-    python gguf_parity_20261012.py --gguf ~/gguf_2p5b/agaram-2.5b-instruct-f16.gguf --hf ~/r4_eval/models/step000017 \
-        --texts ~/gguf_2p5b/parity_texts.jsonl --out ~/gguf_2p5b/parity.json
+    python gguf_parity.py --gguf agaram-2.5b-instruct-f16.gguf --hf murai-labs/agaram-2.5b-instruct \
+        --texts parity_texts.jsonl --out parity.json
 """
 from __future__ import annotations
 

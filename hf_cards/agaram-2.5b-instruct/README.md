@@ -21,9 +21,10 @@ Ramchand Kumaresan. It is not a fine-tune, adaptation or continuation of Llama, 
 any other model. It is a non-profit research model. It is meant for chatting in Tamil script, romanized Tamil
 (Tanglish) and English, and for Tamil–English translation.
 
-This repository holds the chat model: one supervised fine-tuning run from the pretrained base (SFT v2, step 700). The pretrained base model is
-[murai-labs/agaram-2.5b](https://huggingface.co/murai-labs/agaram-2.5b). Code and the paper:
-[Murai-Labs/Agaram2.5b](https://github.com/Murai-Labs/Agaram2.5b).
+This repository holds the chat model: one supervised fine-tuning run from the pretrained base (step 700 of that run). The pretrained base model is
+[murai-labs/agaram-2.5b](https://huggingface.co/murai-labs/agaram-2.5b). Code:
+[Murai-Labs/Agaram2.5b](https://github.com/Murai-Labs/Agaram2.5b). Paper: [arXiv:2610.18420](https://arxiv.org/abs/2610.18420).
+**Try it online:** [chat demo](https://huggingface.co/spaces/mechramc/agaram-2.5b-chat).
 
 The config uses the `LlamaForCausalLM` class because the architecture (a dense pre-norm Transformer with RMSNorm,
 SwiGLU and rotary positions) loads with that code. The weights were trained from random initialisation; no Llama
