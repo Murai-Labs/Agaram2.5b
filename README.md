@@ -11,7 +11,7 @@ any other model. It is a non-profit research model. It is meant for chatting in 
 | Chat model | [murai-labs/agaram-2.5b-instruct](https://huggingface.co/murai-labs/agaram-2.5b-instruct) |
 | Base model | [murai-labs/agaram-2.5b](https://huggingface.co/murai-labs/agaram-2.5b) |
 | Chat CLI | `serving/agaram_chat.py` (greedy, 512 new tokens, crisis-resource footer) |
-| GGUF (llama.cpp) | [murai-labs/agaram-2.5b-gguf](https://huggingface.co/murai-labs/agaram-2.5b-gguf); recipe and parity test in `gguf/` |
+| GGUF (llama.cpp, Ollama) | chat: [murai-labs/agaram-2.5b-gguf](https://huggingface.co/murai-labs/agaram-2.5b-gguf); base: [murai-labs/agaram-2.5b-base-gguf](https://huggingface.co/murai-labs/agaram-2.5b-base-gguf); recipe and parity test in `gguf/` |
 | Model cards | `hf_cards/` (the cards published on Hugging Face) |
 | Paper | https://arxiv.org/abs/2610.18420 |
 

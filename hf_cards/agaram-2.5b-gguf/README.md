@@ -14,7 +14,7 @@ tags:
 
 # Agaram 2.5B (அகரம்) — GGUF
 
-GGUF files of Agaram 2.5B for llama.cpp and tools built on it. Agaram is a Tamil–English model **trained from scratch**
+GGUF files of the Agaram 2.5B chat model for llama.cpp and tools built on it. Agaram is a Tamil–English model **trained from scratch**
 by Murai Labs and Ramchand Kumaresan; it is not a fine-tune of any other model. Model cards:
 [chat](https://huggingface.co/murai-labs/agaram-2.5b-instruct), [base](https://huggingface.co/murai-labs/agaram-2.5b).
 Code: [Murai-Labs/Agaram2.5b](https://github.com/Murai-Labs/Agaram2.5b). Paper: [arXiv:2610.18420](https://arxiv.org/abs/2610.18420).
@@ -22,17 +22,17 @@ Try the chat model online: [chat demo](https://huggingface.co/spaces/mechramc/ag
 
 The chat (instruct) GGUFs were rebuilt on 2026-10-26 from the released Agaram 2.5B-Instruct weights with llama.cpp
 `b11574`; the source model.safetensors SHA-256 is
-`0123c671b233b3e0a6b411e3e88ecb569485f4e20b71719329ac88b75e05bdc6`. The base GGUFs are the 2026-10-12 build, also
-llama.cpp `b11574`. File hashes are in `SHA256SUMS`.
+`0123c671b233b3e0a6b411e3e88ecb569485f4e20b71719329ac88b75e05bdc6`. File hashes are in `SHA256SUMS`.
+
+The base (continuation) model's GGUFs were in this repo until 2026-10-29 and are now in
+[murai-labs/agaram-2.5b-base-gguf](https://huggingface.co/murai-labs/agaram-2.5b-base-gguf), with the same files and
+hashes. This repo holds only the chat files, so tools that pick a file by quantization name load the chat model.
 
 | File | Size | Use |
 |---|---|---|
 | `agaram-2.5b-instruct-f16.gguf` | 5.06 GB | chat, half precision; greedy replies can differ from the HF model's |
 | `agaram-2.5b-instruct-Q8_0.gguf` | 2.69 GB | chat, 8-bit; greedy replies can differ from the HF model's |
 | `agaram-2.5b-instruct-Q4_K_M.gguf` | 1.56 GB | chat, small 4-bit; answers drift and can be wrong where the full model is right (see below) |
-| `agaram-2.5b-f16.gguf` | 5.06 GB | base (continuation model) |
-| `agaram-2.5b-Q8_0.gguf` | 2.69 GB | base |
-| `agaram-2.5b-Q4_K_M.gguf` | 1.56 GB | base, small |
 
 ```
 llama-cli -m agaram-2.5b-instruct-Q8_0.gguf --jinja --temp 0
@@ -41,19 +41,18 @@ llama-server -m agaram-2.5b-instruct-Q8_0.gguf --jinja
 
 - Use `--jinja` so llama.cpp applies the chat template embedded in the file. No system prompt is needed.
 - Greedy decoding (`--temp 0`) is what every reported result used.
-- The instruct files stop on `<|im_end|>` (id 2). The base files stop on `<|endoftext|>` (id 0).
+- The files stop on `<|im_end|>` (id 2).
 - Context: 8,192 tokens.
 
 ### Ollama
 
 ```
-ollama run hf.co/murai-labs/agaram-2.5b-gguf:instruct-Q8_0
+ollama run hf.co/murai-labs/agaram-2.5b-gguf:Q8_0
 ```
 
-Name the instruct file in the tag. This repo holds base and chat files with the same quantization names, and a bare
-tag can pick the base file: `:F16` loads `agaram-2.5b-f16.gguf`, the base continuation model, which is not trained to
-chat (in our test it answered "hey" with "assistant Assistant …" repeated). Ollama applies the chat template embedded in the file; checked with Ollama 0.40.13 on
-2026-10-29. Ollama samples by default; for replies comparable to the reported results, run `/set parameter temperature 0` in the chat.
+Without a tag (`ollama run hf.co/murai-labs/agaram-2.5b-gguf`), Ollama loads the Q4_K_M file; Q8_0 is closer to the
+full model. `:F16` loads the f16 file. Ollama applies the chat template embedded in the file, and the `params` file in
+this repo sets temperature 0, the greedy decoding used for the reported results.
 
 ## Requirements: a llama.cpp that knows the `qwen35` pre-tokenizer
 
@@ -69,8 +68,7 @@ differently.
 - **Tokenization (chat files, 2026-10-26).** llama.cpp's token ids were compared with the Hugging Face tokenizer on 961
   texts: every prompt and reference answer of our three chat evaluation sets (661 texts in Tamil script, Tanglish and
   English) and 300 held-out training conversations rendered with the chat template (special tokens, tool calls, code,
-  JSON). All 961 match exactly for the f16 and Q4_K_M chat files; the Q8_0 file was not tested separately. The f16 base
-  file matched on the same texts on 2026-10-12. None of these texts contains a zero-width joiner, the one case where
+  JSON). All 961 match exactly for the f16 and Q4_K_M chat files; the Q8_0 file was not tested separately. None of these texts contains a zero-width joiner, the one case where
   the patterns differ, so that case is untested.
 - **Replies (chat files, 2026-10-26).** Greedy replies to 8 Tanglish prompts from our evaluation set, compared with the
   HF model's greedy replies (512-token cap): f16 matches character for character on 5 of 8, Q8_0 on 5 of 8, Q4_K_M on

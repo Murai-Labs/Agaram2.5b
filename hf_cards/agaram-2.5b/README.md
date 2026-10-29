@@ -21,7 +21,8 @@ model.
 
 This is a base model: it continues text and does not follow instructions or stop on its own. For chat use
 [murai-labs/agaram-2.5b-instruct](https://huggingface.co/murai-labs/agaram-2.5b-instruct). Code:
-[Murai-Labs/Agaram2.5b](https://github.com/Murai-Labs/Agaram2.5b). Paper: [arXiv:2610.18420](https://arxiv.org/abs/2610.18420). Try the chat
+[Murai-Labs/Agaram2.5b](https://github.com/Murai-Labs/Agaram2.5b). GGUF files of this base model for llama.cpp:
+[murai-labs/agaram-2.5b-base-gguf](https://huggingface.co/murai-labs/agaram-2.5b-base-gguf). Paper: [arXiv:2610.18420](https://arxiv.org/abs/2610.18420). Try the chat
 model online: [chat demo](https://huggingface.co/spaces/mechramc/agaram-2.5b-chat).
 
 The config uses the `LlamaForCausalLM` class because the architecture loads with that code; no Llama weights were
