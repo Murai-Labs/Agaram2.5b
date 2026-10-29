@@ -44,6 +44,17 @@ llama-server -m agaram-2.5b-instruct-Q8_0.gguf --jinja
 - The instruct files stop on `<|im_end|>` (id 2). The base files stop on `<|endoftext|>` (id 0).
 - Context: 8,192 tokens.
 
+### Ollama
+
+```
+ollama run hf.co/murai-labs/agaram-2.5b-gguf:instruct-Q8_0
+```
+
+Name the instruct file in the tag. This repo holds base and chat files with the same quantization names, and a bare
+tag can pick the base file: `:F16` loads `agaram-2.5b-f16.gguf`, the base continuation model, which is not trained to
+chat (in our test it answered "hey" with "assistant Assistant …" repeated). Ollama applies the chat template embedded in the file; checked with Ollama 0.40.13 on
+2026-10-29. Ollama samples by default; for replies comparable to the reported results, run `/set parameter temperature 0` in the chat.
+
 ## Requirements: a llama.cpp that knows the `qwen35` pre-tokenizer
 
 Agaram's tokenizer is a byte-level BPE whose pre-tokenizer is Qwen2's split pattern with Unicode combining marks and
